@@ -1,6 +1,6 @@
 # AlgorithmStudy
   
-* Acmimpc   
+* BOJ(Acmimpc)   
 https://www.acmicpc.net/user/ehye826    
      
 * Hackerrank      
