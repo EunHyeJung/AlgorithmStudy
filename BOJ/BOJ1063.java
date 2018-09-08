@@ -3,14 +3,11 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Main {
 	public static void main(String[] args) {
 		try {
 			Chess chess = new Chess();
-			chess.init();
 			chess.moveKing();
 			chess.printOutput();
 		} catch (IOException e) {
@@ -22,41 +19,32 @@ public class Main {
 class Chess {
 	private static final int[][] DIR = { { -1, 0 }, { -1, 1 }, { 0, 1 }, { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, -1 },
 			{ -1, -1 } };
-	private static final int N = 8;
+	private final int N = 8;
+
+	private enum MOVING_DIR {
+		T, RT, R, RB, B, LB, L, LT
+	};
+
 	private Pos king;
 	private Pos stone;
-	private Map<Character, Integer> colMap;
-	private Map<String, Integer> dirMap;
 	private int cmdCnt;
 
-	public Chess() {
-		colMap = new HashMap<>();
-		dirMap = new HashMap<>();
-		for (int c = 65; c <= 72; c++) {
-			colMap.put((char) c, c - 65);
-		}
-		dirMap.put("T", 0);
-		dirMap.put("RT", 1);
-		dirMap.put("R", 2);
-		dirMap.put("RB", 3);
-		dirMap.put("B", 4);
-		dirMap.put("LB", 5);
-		dirMap.put("L", 6);
-		dirMap.put("LT", 7);
-		cmdCnt = 0;
+	public Chess() throws IOException {
+		this.init();
+
 	}
 
 	public void init() throws IOException {
 		String[] inputs = IOUtils.readInput().split(" ");
-		king = new Pos(N - (inputs[0].charAt(1) - '0'), colMap.get(inputs[0].charAt(0)));
-		stone = new Pos(N - (inputs[1].charAt(1) - '0'), colMap.get(inputs[1].charAt(0)));
+		king = new Pos(N - (inputs[0].charAt(1) - '0'), (inputs[0].charAt(0) - 65));
+		stone = new Pos(N - (inputs[1].charAt(1) - '0'), (inputs[1].charAt(0) - 65));
 		this.cmdCnt = Integer.parseInt(inputs[2]);
 	}
 
 	public void moveKing() throws IOException {
 		for (int c = 0; c < cmdCnt; c++) {
 			String cmd = IOUtils.readInput();
-			int cmdDir = dirMap.get(cmd);
+			int cmdDir = MOVING_DIR.valueOf(cmd).ordinal();
 			Pos nextKingPos = new Pos(king.getY() + DIR[cmdDir][0], king.getX() + DIR[cmdDir][1]);
 
 			// 킹의 이동가능 여부 확인, 이동불가능하면 다음명령 진행
