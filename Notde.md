@@ -45,7 +45,26 @@ ex) GCD(24, 16) = GCD(16, 8) = GCD(8, 0) = 8
   최소 공배수 `LCM = g * (a/g) * (b/g)`   
      
 - - -    
-      
+ 
+   
+### 소인수 분해 (Prime Factorization)   
+    
+* N을 소인수분해 했을때, 나타나는 인수 중 가장 큰 값은 루트N  
+  2부터 루트N까지 반복문을 돌면 소인수 분해를 할 수 있다.   
+   
+  ```java    
+  for (int p = 2; p * p <= N; p++) {
+     while(n % p == 0) {
+        System.out.println(p);  // 소인수 출력  
+        n /= p;
+     }
+  }
+  if(n > 1) {
+     System.out.println(n);  
+  }
+  ```
+  
+- - -   
   
     
 
