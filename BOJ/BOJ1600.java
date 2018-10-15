@@ -5,6 +5,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
+/*
+* @source https://www.acmicpc.net/problem/1600
+* @author EunHyeJung
+* @email ehye826@gmail.com
+* @date 2018.10.15
+*/
 public class Main {
     public static void main(String[] args) {
         try {
