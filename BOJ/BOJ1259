@@ -1,0 +1,22 @@
+'''
+    @date : 2021-02-01
+    @source : https://www.acmicpc.net/problem/1259
+    @email : ehye826@gmail.com
+'''
+
+while True:
+    word = input()
+    if(word == "0"):
+        break
+    n = int(len(word) % 2 == 0 and len(word)/2 or len(word)/2 - 1)
+    res = 'yes'
+    
+    for i in range(0, n + 1):
+        if (word[i] != word[len(word) - (i + 1)]):
+            res = 'no'
+            break
+        
+    print(res)
+    
+
+    
