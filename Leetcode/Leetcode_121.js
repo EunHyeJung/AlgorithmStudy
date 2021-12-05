@@ -6,24 +6,14 @@
  * @date 2021.12.05
  * @link https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
  */
-
 var maxProfit = function(prices) {
-    lowestPrices = [];
-    prices.forEach(function(price, idx) {
-      if (lowestPrices.length == 0)
-        lowestPrices.push(price);
-      else {
-        let previousPrice = lowestPrices[idx - 1];
-        if (previousPrice > price)
-          lowestPrices.push(price);
-        else
-          lowestPrices.push(previousPrice);
+    let buyPrice = 99999, profit = 0;
+    for (let i = 0, n = prices.length; i < n; i++) {
+      if (prices[i] < buyPrice) {
+        buyPrice = prices[i];
+        continue;
       }
-    });
-    let profit = 0;
-    lowestPrices.forEach(function(lowestPrice, idx) {
-      if (profit < prices[idx] - lowestPrice)
-        profit = prices[idx] - lowestPrice;
-    });
+      profit = Math.max(prices[i] - buyPrice, profit);
+    }
     return profit;
 };
